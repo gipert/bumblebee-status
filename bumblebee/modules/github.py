@@ -54,5 +54,11 @@ class Module(bumblebee.engine.Module):
         except Exception:
             self._count = "n/a"
 
+    def state(self, _):
+        if self._count == 'n/a':
+            return "ERROR"
+        elif self._count != 0:
+            return "NEW"
+
 
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

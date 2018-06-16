@@ -115,16 +115,16 @@
 		"repeat-off": { "prefix": "" }
 	},
   "github": {
-	  "prefix": "  "
+	  "prefix": " "
   },
   "hipchat": {
-	  "prefix": "  "
+	  "prefix": " "
   },
   "spotify": {
-	  "prefix": "  "
+	  "prefix": " "
   },
   "publicip": {
-	  "prefix": "  "
+	  "prefix": " "
   },
   "weather": {
     "clouds": { "prefix": "" },
@@ -134,6 +134,12 @@
     "thunder": { "prefix": "" }
   },
   "taskwarrior": {
-      "prefix": "  "
+      "prefix": " "
+  },
+  "docker": {
+      "prefix": " "
+  },
+  "newmails": {
+      "prefix": " "
   }
 }
