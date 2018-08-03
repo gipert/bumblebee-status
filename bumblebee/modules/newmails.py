@@ -3,6 +3,7 @@
 """Displays unread emails.
 
 Parameters:
+    * newmails.shortname  : a short alias to be displayed
     * newmails.imapserver : e.g. imap.gmail.com
     * newmails.user       : your username, some accounts want the complete user@domain
     * newmails.password   : your password (maybe 'chmod og-rwx bumblebee-status.conf' then)
