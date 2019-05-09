@@ -2,17 +2,17 @@
 
 """Displays the name, IP address(es) and status of each available network interface.
 
+Requires the following python module:
+    * netifaces
+
 Parameters:
     * nic.exclude: Comma-separated list of interface prefixes to exclude (defaults to "lo,virbr,docker,vboxnet,veth")
     * nic.states: Comma-separated list of states to show (prefix with "^" to invert - i.e. ^down -> show all devices that are not in state down)
     * nic.format: Format string (defaults to "{intf} {state} {ip} {ssid}")
 """
 
-try:
-    import netifaces
-    import subprocess
-except ImportError:
-    pass
+import netifaces
+import subprocess
 
 import bumblebee.util
 import bumblebee.input
@@ -35,6 +35,8 @@ class Module(bumblebee.engine.Module):
                 self._states["include"].append(state)
         self._format = self.parameter("format","{intf} {state} {ip} {ssid}");
         self._update_widgets(widgets)
+        self.iwgetid = bumblebee.util.which("iwgetid")
+
 
     def update(self, widgets):
         self._update_widgets(widgets)
@@ -61,7 +63,7 @@ class Module(bumblebee.engine.Module):
         return False
 
     def _istunnel(self, intf):
-        return intf.startswith("tun")
+        return intf.startswith("tun") or intf.startswith("wg")
 
     def get_addresses(self, intf):
         retval = []
@@ -72,7 +74,7 @@ class Module(bumblebee.engine.Module):
         except Exception:
             return []
         return retval
-    
+
     def _update_widgets(self, widgets):
         interfaces = [i for i in netifaces.interfaces() if not i.startswith(self._exclude)]
 
@@ -88,7 +90,7 @@ class Module(bumblebee.engine.Module):
 
             if len(self._states["exclude"]) > 0 and state in self._states["exclude"]: continue
             if len(self._states["include"]) > 0 and state not in self._states["include"]: continue
-            
+
             widget = self.widget(intf)
             if not widget:
                 widget = bumblebee.output.Widget(name=intf)
@@ -102,11 +104,11 @@ class Module(bumblebee.engine.Module):
         for widget in widgets:
             if widget.get("visited") is False:
                 widgets.remove(widget)
-    
+
     def get_ssid(self, intf):
         if self._iswlan(intf):
             try:
-                return subprocess.check_output(["iwgetid","-r",intf]).strip().decode('utf-8')
+                return subprocess.check_output([self.iwgetid,"-r",intf]).strip().decode('utf-8')
             except:
                 return ""
         return ""

@@ -10,11 +10,15 @@
 	"cpu": { "prefix": "" },
 	"disk": { "prefix": "" },
 	"dnf": { "prefix": "" },
+	"apt": { "prefix": "" },
 	"pacman": { "prefix": "" },
 	"brightness": { "prefix": "" },
 	"load": { "prefix": "" },
 	"layout": { "prefix": "" },
 	"layout-xkb": { "prefix": "" },
+	"notmuch_count": { "empty": {"prefix": "\uf0e0" },
+	"items": {"prefix": "\uf0e0" }
+	},
 	"todo": { "empty": {"prefix": "" },
 	"items": {"prefix": "" },
 	"uptime": {"prefix": "" }
@@ -56,9 +60,9 @@
 		"muted": { "prefix": "" },
 		"unmuted": { "prefix": "" }
 	},
-  "kernel": {
-    "prefix": "\uf17c"
-  },
+   "kernel": {
+       "prefix": "\uf17c"
+    },
 	"nic": {
 		"wireless-up": { "prefix": "" },
 		"wireless-down": { "prefix": "" },
@@ -85,25 +89,63 @@
 		"discharging-80": { "prefix": "", "suffix": "" },
 		"discharging-100": { "prefix": "", "suffix": "" },
 		"unlimited": { "prefix": "", "suffix": "" },
-		"estimate": {	"prefix": ""  }
+		"estimate": {	"prefix": ""  },
+		"unknown-10": { "prefix": "", "suffix": "" },
+		"unknown-25": { "prefix": "", "suffix": "" },
+		"unknown-50": { "prefix": "", "suffix": "" },
+		"unknown-80": { "prefix": "", "suffix": "" },
+		"unknown-100": { "prefix": "", "suffix": "" }
+	},
+	"battery_all": {
+		"charged": { "prefix": "", "suffix": "" },
+		"AC": { "suffix": "" },
+		"charging": {
+			"prefix": [ "", "", "", "", "" ],
+			"suffix": ""
+		},
+		"discharging-10": { "prefix": "", "suffix": "" },
+		"discharging-25": { "prefix": "", "suffix": "" },
+		"discharging-50": { "prefix": "", "suffix": "" },
+		"discharging-80": { "prefix": "", "suffix": "" },
+		"discharging-100": { "prefix": "", "suffix": "" },
+		"unlimited": { "prefix": "", "suffix": "" },
+		"estimate": {	"prefix": ""  },
+		"unknown-10": { "prefix": "", "suffix": "" },
+		"unknown-25": { "prefix": "", "suffix": "" },
+		"unknown-50": { "prefix": "", "suffix": "" },
+		"unknown-80": { "prefix": "", "suffix": "" },
+		"unknown-100": { "prefix": "", "suffix": "" }
 	},
 	"caffeine": {
-		"activated": {"prefix": " " }, "deactivated": { "prefix": " " }
+		"activated": {"prefix": " " },
+		"deactivated": { "prefix": " " }
 	},
 	"xrandr": {
-		"on": { "prefix": " "}, "off": { "prefix": " " }
+		"on": { "prefix": " "},
+		"off": { "prefix": " " },
+		"refresh": { "prefix": "" }
 	},
 	"redshift": {
-		"day": { "prefix": "" }, "night": { "prefix": "" }, "transition": { "prefix": "" }
+		"day": { "prefix": "" },
+		"night": { "prefix": "" },
+		"transition": { "prefix": "" }
 	},
-  "sensors": {
-    "prefix": ""
-  },
-  "traffic":{
-	  "rx": { "prefix": "" },
-	  "tx": { "prefix": "" }
-  },
-  "mpd": {
+	"docker_ps": {
+		"prefix": ""
+	},
+    "sensors": {
+        "prefix": ""
+    },
+    "sensors2": {
+		"temp": { "prefix": "" },
+		"fan": { "prefix": "" },
+		"cpu": { "prefix": "" }
+    },
+    "traffic":{
+	    "rx": { "prefix": "" },
+	    "tx": { "prefix": "" }
+    },
+    "mpd": {
 		"playing": { "prefix": "" },
 		"paused": { "prefix": "" },
 		"stopped": { "prefix": "" },
@@ -114,32 +156,50 @@
 		"repeat-on": { "prefix": "" },
 		"repeat-off": { "prefix": "" }
 	},
-  "github": {
-	  "prefix": " "
-  },
+	"github": {
+		"prefix": "  "
+	},
   "hipchat": {
 	  "prefix": " "
   },
-  "spotify": {
-	  "prefix": " "
-  },
-  "publicip": {
-	  "prefix": " "
-  },
-  "weather": {
-    "clouds": { "prefix": "" },
-    "rain": { "prefix": "" },
-    "snow": { "prefix": "" },
-    "clear": { "prefix": "" },
-    "thunder": { "prefix": "" }
-  },
-  "taskwarrior": {
-      "prefix": " "
-  },
+    "spotify": {
+	    "prefix": "  "
+    },
+    "publicip": {
+	    "prefix": "  "
+    },
+    "weather": {
+       "clouds": { "prefix": "" },
+       "rain": { "prefix": "" },
+       "snow": { "prefix": "" },
+       "clear": { "prefix": "" },
+       "thunder": { "prefix": "" }
+    },
+    "taskwarrior": {
+       "prefix": "  "
+    },
   "docker": {
       "prefix": " "
   },
   "newmails": {
       "prefix": " "
-  }
+  },
+	"arch-update": {
+		"prefix": " "
+	},
+    "progress": {
+       "copying": {
+		   "prefix": ""
+		}
+    },
+	"git": {
+		"main": { "prefix": "" },
+		"new": { "prefix": "" },
+		"modified": { "prefix": "" },
+		"deleted": { "prefix": "" }
+	},
+    "dunst": {
+        "muted": { "prefix": ""},
+        "unmuted": { "prefix": "" }
+    }
 }

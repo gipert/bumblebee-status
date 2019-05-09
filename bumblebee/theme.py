@@ -115,6 +115,9 @@ class Theme(object):
         pre = self._get(widget, "prefix", None)
         return u"{}{}{}".format(padding, pre, padding) if pre else default
 
+    def symbol(self, widget, name, default=None):
+        return self._get(widget, name, default)
+
     def suffix(self, widget, default=None):
         """Return the theme suffix for a widget's full text"""
         padding = self._get(widget, "padding", "")
@@ -189,6 +192,14 @@ class Theme(object):
     def load(self, name, path=theme_path()):
         """Load and parse a theme file"""
         result = None
+
+        full_name = os.path.expanduser(name)
+        if os.path.isfile(full_name):
+            path = os.path.dirname(full_name)
+            name = os.path.basename(full_name)
+            name,_,_ = name.rpartition(".json")
+            return self.load(name, path)
+
         if not isinstance(path, list):
             path = [path]
         for p in path:

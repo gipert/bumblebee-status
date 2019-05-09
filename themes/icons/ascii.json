@@ -6,6 +6,7 @@
 	"cpu": { "prefix": "cpu" },
 	"disk": { "prefix": "hdd" },
 	"dnf": { "prefix": "dnf" },
+	"apt": { "prefix": "apt" },
 	"brightness": { "prefix": "o" },
 	"cmus": {
 		"playing": { "prefix": ">" },
@@ -49,16 +50,40 @@
 		"discharging-25": { "suffix": "dis" },
 		"discharging-50": { "suffix": "dis" },
 		"discharging-80": { "suffix": "dis" },
-		"discharging-100": { "suffix": "dis" }
+		"discharging-100": { "suffix": "dis" },
+		"unknown-25": { "suffix": "?" },
+		"unknown-50": { "suffix": "?" },
+		"unknown-80": { "suffix": "?" },
+		"unknown-100": { "suffix": "?" }
+	},
+	"battery_all": {
+		"charged": { "suffix": "full" },
+		"charging": { "suffix": "chr" },
+		"AC": { "suffix": "ac" },
+		"discharging-10": {
+			"prefix": "!",
+			"suffix": "dis"
+		},
+		"discharging-25": { "suffix": "dis" },
+		"discharging-50": { "suffix": "dis" },
+		"discharging-80": { "suffix": "dis" },
+		"discharging-100": { "suffix": "dis" },
+		"unknown-25": { "suffix": "?" },
+		"unknown-50": { "suffix": "?" },
+		"unknown-80": { "suffix": "?" },
+		"unknown-100": { "suffix": "?" }
 	},
 	"caffeine": {
 		"activated": {"prefix": "caf-on" }, "deactivated": { "prefix": "caf-off " }
 	},
 	"xrandr": {
-		"on": { "prefix": " off "}, "off": { "prefix": " on "}
+		"on": { "prefix": " off "}, "off": { "prefix": " on "}, "refresh": { "prefix": " refresh "}
 	},
 	"redshift": {
 		"day": { "prefix": "day" }, "night": { "prefix": "night" }, "transition": { "prefix": "trans" }
+	},
+	"docker_ps": {
+		"prefix": "containers"
 	},
 	"sensors": {
 		"prefix": "sensors"
@@ -81,9 +106,6 @@
 	"github": {
 		"prefix": "github"
 	},
-	"hipchat": {
-		"prefix": "hipchat"
-	},
 	"spotify": {
 		"prefix": ""
 	},
@@ -96,5 +118,16 @@
 		"ONLINE": {"prefix": "pool"},
 		"FAULTED": {"prefix": "pool (!)"},
 		"DEGRADED": {"prefix": "pool (!)"}
-	}
+	},
+	"git": {
+		"main": { "prefix": "" },
+		"new": { "prefix": "[n]" },
+		"modified": { "prefix": "[m]" },
+		"deleted": { "prefix": "[d]" }
+	},
+    "dunst": {
+        "muted": { "prefix": "dunst(muted)"},
+        "unmuted": { "prefix": "dunst" }
+    }
+
 }

@@ -5,7 +5,7 @@
 [![Test Coverage](https://codeclimate.com/github/tobi-wan-kenobi/bumblebee-status/badges/coverage.svg)](https://codeclimate.com/github/tobi-wan-kenobi/bumblebee-status/coverage)
 [![Issue Count](https://codeclimate.com/github/tobi-wan-kenobi/bumblebee-status/badges/issue_count.svg)](https://codeclimate.com/github/tobi-wan-kenobi/bumblebee-status)
 
-**Many, many thanks to all contributors! As of now, 27 of the modules are from various contributors (!), and only 16 from myself.**
+**Many, many thanks to all contributors! As of now, 38 of the modules are from various contributors (!), and only 18 from myself.**
 
 ![Solarized Powerline](https://github.com/tobi-wan-kenobi/bumblebee-status/blob/master/screenshots/themes/powerline-solarized.png)
 
@@ -29,6 +29,26 @@ Supported Python versions: 2.7, 3.3, 3.4, 3.5, 3.6
 Supported FontAwesome version: 4 (free version of 5 doesn't include some of the icons)
 
 Explicitly unsupported Python versions: 3.2 (missing unicode literals)
+
+:information_source: The ![Font Awesome](https://fontawesome.com/) is required for all themes that contain icons (because that is the font that includes these icons). Please refer to your distribution's package management on how to install them, or get them from their website directly. Also, please note that Font Awesome removed some icons used by `bumblebee-status` from the free set in version 5, so if possible, stick with 4.
+
+```
+# Font Awesome installation instructions
+
+# Arch Linux
+$ sudo pacman -S awesome-terminal-fonts
+
+# Other
+# see https://github.com/gabrielelana/awesome-terminal-fonts
+```
+
+Example usage:
+
+```
+bar {
+	status_command <path>/bumblebee-status -m cpu memory battery time pasink pasource -p time.format="%H:%M" -t solarized
+}
+```
 
 # Documentation
 See [the wiki](https://github.com/tobi-wan-kenobi/bumblebee-status/wiki) for documentation.
@@ -56,11 +76,11 @@ In your i3wm configuration, modify the *status_command* for your i3bar like this
 
 ```
 bar {
-	status_command = <path to bumblebee-status/bumblebee-status> -m <list of modules> -p <list of module parameters> -t <theme>
+	status_command <path to bumblebee-status/bumblebee-status> -m <list of modules> -p <list of module parameters> -t <theme>
 }
 ```
 
-You can retrieve a list of modules and themes by entering:
+You can retrieve a list of modules (and their parameters) and themes by entering:
 ```
 $ cd bumblebee-status
 $ ./bumblebee-status -l themes
@@ -151,16 +171,21 @@ $ ./bumblebee-status -d -m <list of modules>
 
 This will create a file called `~/bumblebee-status-debug.log` by default. The file name can be changed by using the `-f` or `--logfile` option.
 
+### Advanced Usage
+If you want to have a minimal bar that stays out of the way, you can use the `-a` or `--autohide` switch to specify a list of module names. All those modules will only be displayed when (and as long as) their state is either warning or critical (high CPU usage, low disk space, etc.). As long as the module is in a "normal" state and does not require attention, it will remain hidden.
+
 # Required Modules
 
 Modules and commandline utilities are only required for modules, the core itself has no external dependencies at all.
 
 * psutil (for the modules 'cpu', 'memory', 'traffic')
 * netifaces (for the modules 'nic', 'traffic')
-* requests (for the modules 'weather', 'github', 'getcrypto', 'stock', 'hipchat', 'currency')
+* requests (for the modules 'weather', 'github', 'getcrypto', 'stock', 'currency')
 * power (for the module 'battery')
 * dbus (for the module 'spotify')
 * i3ipc (for the module 'title')
+* pacman-contrib (for module 'arch-update')
+* docker (for the module 'docker_ps')
 
 # Required commandline utilities
 
@@ -182,6 +207,7 @@ Modules and commandline utilities are only required for modules, the core itself
 * nvidia-smi (for module 'nvidiagpu')
 * sensors (for module 'sensors', as fallback)
 * zpool (for module 'zpool')
+* progress (for module 'progress')
 
 # Examples
 Here are some screenshots for all themes that currently exist:
@@ -216,9 +242,29 @@ Powerline (`-t powerline`):
 
 ![Powerline](https://github.com/tobi-wan-kenobi/bumblebee-status/blob/master/screenshots/themes/powerline.png)
 
-Greyish Powerline (`-t greyish-powerline`)
+Greyish Powerline (`-t greyish-powerline`) (contributed by Joshua Bark):
 
 ![Greyish Powerline](https://github.com/tobi-wan-kenobi/bumblebee-status/blob/master/screenshots/themes/powerline-greyish.png)
+
+Iceberg (`-t iceberg`) (contributed by [whzup](https://github.com/whzup)):
+
+![Iceberg](https://github.com/tobi-wan-kenobi/bumblebee-status/blob/master/screenshots/themes/iceberg.png)
+
+Iceberg Powerline (`-t iceberg-powerline`) (contributed by [whzup](https://github.com/whzup)):
+
+![Iceberg Powerline](https://github.com/tobi-wan-kenobi/bumblebee-status/blob/master/screenshots/themes/iceberg-powerline.png)
+
+Iceberg Dark Powerline (`-t iceberg-dark-powerline`) (contributed by [gkeep](https://github.com/gkeep)):
+
+![Iceberg Dark Powerline](https://github.com/tobi-wan-kenobi/bumblebee-status/blob/master/screenshots/themes/iceberg-dark-powerline.png)
+
+Iceberg Rainbow (`-t iceberg-rainbow`) (contributed by [whzup](https://github.com/whzup)):
+
+![Iceberg Rainbow](https://github.com/tobi-wan-kenobi/bumblebee-status/blob/master/screenshots/themes/iceberg-rainbow.png)
+
+One Dark Powerline (`-t onedark-powerline`) (contributed by [dillasyx](https://github.com/dillasyx)):
+
+![One Dark Powerline](https://github.com/tobi-wan-kenobi/bumblebee-status/blob/master/screenshots/themes/onedark-powerline.png)
 
 Default (nothing or `-t default`):
 
