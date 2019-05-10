@@ -20,4 +20,7 @@ class Module(bumblebee.engine.Module):
     def text(self, widget):
         return self._text
 
+    def state(self, _):
+        return "OK"
+
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

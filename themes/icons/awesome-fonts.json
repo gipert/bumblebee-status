@@ -63,6 +63,9 @@
    "kernel": {
        "prefix": "\uf17c"
     },
+   "spacer": {
+       "suffix": "\uf17c"
+    },
 	"nic": {
 		"wireless-up": { "prefix": "" },
 		"wireless-down": { "prefix": "" },
@@ -180,6 +183,9 @@
     },
   "docker": {
       "prefix": " "
+  },
+  "ncmpcpp": {
+      "prefix": ""
   },
   "newmails": {
       "prefix": " "
