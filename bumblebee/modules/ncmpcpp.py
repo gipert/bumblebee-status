@@ -29,10 +29,10 @@ class Module(bumblebee.engine.Module):
 
     def state(self, _):
         if self.song == "n/a":
-            return "ERROR"
+            return "critical"
         elif self.song == "":
-            return "STOP"
+            return "stopped"
         else:
-            return "PLAYING"
+            return "warning"
 
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

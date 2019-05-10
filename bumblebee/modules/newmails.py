@@ -51,9 +51,9 @@ class Module(bumblebee.engine.Module):
 
     def state(self, _):
         if self._count == 'n/a':
-            return "ERROR"
+            return "critical"
         elif self._count != 0:
-            return "NEW"
+            return "warning"
         else:
             return "NONEW"
 
