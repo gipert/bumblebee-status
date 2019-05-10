@@ -29,7 +29,7 @@ class Module(bumblebee.engine.Module):
         self._requests = requests.Session()
         self._requests.headers.update({"Authorization":"token {}".format(self.parameter("token", ""))})
         engine.input.register_callback(self, button=bumblebee.input.LEFT_MOUSE,
-            cmd="x-www-browser https://github.com/notifications")
+            cmd="xdg-open https://github.com/notifications")
         engine.input.register_callback(self, button=bumblebee.input.RIGHT_MOUSE, cmd=self.update)
 
     def github(self, _):
