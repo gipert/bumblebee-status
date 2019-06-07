@@ -91,8 +91,8 @@
 	"deleted": { "bg": "#9d0006" },
 	"new": { "bg": "#b16286" }
   },
-  "spacer" : {
-      "OK" : {
+  "hostname" : {
+      "good" : {
 			"fg": "#002b36",
 			"bg": "#458588"
       }

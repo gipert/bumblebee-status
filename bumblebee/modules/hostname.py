@@ -21,4 +21,7 @@ class Module(bumblebee.engine.Module):
         with open('/proc/sys/kernel/hostname', 'r') as f:
             self._hname = f.readline().split()[0]
 
+    def state(self, _):
+        return "good"
+
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
