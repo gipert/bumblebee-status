@@ -25,8 +25,8 @@ class Module(bumblebee.engine.Module):
             mail.login(self.parameter("user", ""), self.parameter("password", ""))
             mail.select("inbox", True) # connect to inbox.
             return_code, mail_ids = mail.search(None, 'UnSeen')
-            self._count = len(mail_ids[0].split(" "))
-            if len(mail_ids[0].split(" ")) == 1 and mail_ids[0].split(" ")[0] == '':
+            self._count = len(mail_ids[0].split(b" "))
+            if len(mail_ids[0].split(b" ")) == 1 and mail_ids[0].split(b" ")[0] == '':
                 self._count = 0
         except:
             self._count = 'n/a'
@@ -43,8 +43,8 @@ class Module(bumblebee.engine.Module):
             mail.login(self.parameter("user", ""), self.parameter("password", ""))
             mail.select("inbox", True) # connect to inbox.
             return_code, mail_ids = mail.search(None, 'UnSeen')
-            self._count = len(mail_ids[0].split(" "))
-            if len(mail_ids[0].split(" ")) == 1 and mail_ids[0].split(" ")[0] == '':
+            self._count = len(mail_ids[0].split(b" "))
+            if len(mail_ids[0].split(b" ")) == 1 and mail_ids[0].split(b" ")[0] == '':
                 self._count = 0
         except:
             self._count = 'n/a'
