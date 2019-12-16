@@ -15,8 +15,11 @@ from __future__ import absolute_import
 import datetime
 import locale
 import bumblebee.engine
-
-ALIASES = ["date", "time"]
+import os
+try:
+    import pytz
+except ModuleNotFoundError:
+    pytz = None
 
 def default_format(module):
     default = "%x %X"
@@ -40,11 +43,18 @@ class Module(bumblebee.engine.Module):
         try:
             locale.setlocale(locale.LC_TIME, lcl.split("."))
         except Exception as e:
-            locale.setlocale(locale.LC_TIME, lcl.split("en_US.UTF-8"))
+            locale.setlocale(locale.LC_TIME, ('en_US', 'UTF-8'))
 
     def get_time(self, widget):
+        if pytz:
+            # Get local timezone (see https://github.com/tobi-wan-kenobi/bumblebee-status/issues/468)
+            my_tz_name = '/'.join(os.path.realpath('/etc/localtime').split('/')[-2:])
+            my_tz = pytz.timezone(my_tz_name)
+        else:
+            my_tz = None
+        
         enc = locale.getpreferredencoding()
-        retval = datetime.datetime.now().strftime(self._fmt)
+        retval = datetime.datetime.now(my_tz).strftime(self._fmt)
         if hasattr(retval, "decode"):
             return retval.decode(enc)
         return retval

@@ -7,7 +7,7 @@ Requires the following library:
 
 Parameters:
     * github.token: GitHub user access token, the token needs to have the 'notifications' scope.
-    * github.interval: Interval in minutes
+    * github.interval: Interval in minutes between updates, default is 5.
 """
 
 import bumblebee.input
@@ -25,6 +25,7 @@ class Module(bumblebee.engine.Module):
                                      bumblebee.output.Widget(full_text=self.github)
                                     )
         self._count = 0
+        self.interval_factor(60)
         self.interval(5)
         self._requests = requests.Session()
         self._requests.headers.update({"Authorization":"token {}".format(self.parameter("token", ""))})

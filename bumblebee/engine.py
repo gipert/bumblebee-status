@@ -25,7 +25,7 @@ def all_modules():
             "name": mod
         })
     return result
-
+  
 class Module(object):
     """Module instance base class
 
@@ -41,6 +41,8 @@ class Module(object):
         self.error = None
         self._next = int(time.time())
         self._default_interval = 0
+        self._interval_factor = 1
+        self._engine = engine
 
         self._configFile = None
         for cfg in [os.path.expanduser("~/.bumblebee-status.conf"), os.path.expanduser("~/.config/bumblebee-status.conf")]:
@@ -56,10 +58,13 @@ class Module(object):
         if widgets:
             self._widgets = widgets if isinstance(widgets, list) else [widgets]
 
+    def theme(self):
+        return self._engine.theme()
+
     def widgets(self, widgets=None):
         """Return the widgets to draw for this module"""
         if widgets:
-            self._widgets = widgets
+            self._widgets = widgets if isinstance(widgets, list) else [widgets]
         return self._widgets
 
     def hidden(self):
@@ -95,7 +100,10 @@ class Module(object):
         except Exception as e:
             log.error("error updating '{}': {}".format(self.name, str(e)))
             self.error = str(e)
-        self._next += int(self.parameter("interval", self._default_interval))*60
+        self._next += int(self.parameter("interval", self._default_interval))*self._interval_factor
+
+    def interval_factor(self, factor):
+        self._interval_factor = factor
 
     def interval(self, intvl):
         self._default_interval = intvl
@@ -110,8 +118,10 @@ class Module(object):
 
     def parameter(self, name, default=None):
         """Return the config parameter 'name' for this module"""
+        module_name = "{}.{}".format(self.__module__.split(".")[-1], name)
         name = "{}.{}".format(self.name, name)
-        value = self._config["config"].get(name, default)
+        value = self._config["config"].get(module_name, default)
+        value = self._config["config"].get(name, value)
         if value == default:
             try:
                 value = self._configFile.get("module-parameters", name)
@@ -138,7 +148,7 @@ class Engine(object):
         self._running = True
         self._modules = []
         self.input = inp
-        self._aliases = self._read_aliases()
+        self._aliases = self._aliases()
         self.load_modules(config.modules())
         self._current_module = None
         self._theme = theme
@@ -159,6 +169,9 @@ class Engine(object):
                 cmd=self._toggle_minimize)
 
         self.input.start()
+
+    def theme(self):
+        return self._theme
 
     def _toggle_minimize(self, event):
         for module in self._modules:
@@ -223,16 +236,16 @@ class Engine(object):
                 self.input.register_callback(obj=module,
                     button=button["id"], cmd=module.parameter(button["name"]))
 
-    def _read_aliases(self):
-        result = {}
-        for module in all_modules():
-            try:
-                mod = importlib.import_module("bumblebee.modules.{}".format(module["name"]))
-                for alias in getattr(mod, "ALIASES", []):
-                    result[alias] = module["name"]
-            except Exception as error:
-                log.warning("failed to import {}: {}".format(module["name"], str(error)))
-        return result
+    def _aliases(self):
+        return {
+            'date': 'datetime',
+            'time': 'datetime',
+            'datetz': 'datetimetz',
+            'timetz': 'datetimetz',
+            'pasink': 'pulseaudio',
+            'pasource': 'pulseaudio',
+            'test-alias': 'test',
+        }
 
     def _load_module(self, module_name, config_name=None):
         """Load specified module and return it as object"""

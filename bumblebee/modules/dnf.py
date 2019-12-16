@@ -6,7 +6,7 @@ Requires the following executable:
     * dnf
 
 Parameters:
-    * dnf.interval: Time in seconds between two consecutive update checks (defaults to 30 minutes)
+    * dnf.interval: Time in minutes between two consecutive update checks (defaults to 30 minutes)
 
 """
 
@@ -52,6 +52,7 @@ class Module(bumblebee.engine.Module):
     def __init__(self, engine, config):
         widget = bumblebee.output.Widget(full_text=self.updates)
         super(Module, self).__init__(engine, config, widget)
+        self.interval_factor(60)
         self.interval(30)
 
     def updates(self, widget):
