@@ -19,6 +19,13 @@ def asbool(val):
     val = str(val).strip().lower()
     return val in ("t", "true", "y", "yes", "on", "1")
 
+def aslist(val):
+    if val is None:
+        return []
+    if isinstance(val, list):
+        return val
+    return str(val).replace(' ', '').split(',')
+
 def execute(cmd, wait=True):
     logging.info("executing command '{}'".format(cmd))
     args = shlex.split(cmd)
@@ -31,7 +38,7 @@ def execute(cmd, wait=True):
             raise RuntimeError("{} exited with {}".format(cmd, proc.returncode))
 
         if hasattr(out, "decode"):
-            rv = out.decode("utf-8")
+            rv = out.decode("utf-8", "ignore")
         else:
             rv = out
 
